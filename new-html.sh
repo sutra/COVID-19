@@ -239,6 +239,7 @@ cat >> "${htmlFilePath}" <<- EOM
 <ul>
 	<li>最后更新：${lastUpdateDate}</li>
 	<li><a href="https://mp.weixin.qq.com/s/sTAn2ZrJTQyvLEqXMyYeDg">疫情数据由澎湃新闻美数课整理提供</a></li>
+	<li><a href="https://github.com/sutra/COVID-19">© 2020 Sutra Zhou</a></li>
 </ul>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.4.0/dist/lazyload.min.js"></script>
