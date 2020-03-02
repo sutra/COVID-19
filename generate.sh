@@ -35,7 +35,7 @@ else
 	mkdir -p "${output}"
 fi
 
-${basedir}/new-images.sh \
+${basedir}/images.sh \
 	-i "${input}" \
 	-o "${output}"
 
@@ -44,6 +44,6 @@ if [ ${status} -ne 0 ]; then
 	exit ${status}
 fi
 
-${basedir}/new-html.sh \
+${basedir}/html.sh \
 	-i "${input}" \
 	-o "${output}"

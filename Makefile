@@ -8,13 +8,13 @@ csv:
 	Rscript csv.R build/Updates_NC.csv build/Updates_NC-normalized.csv
 
 generate:
-	./new.sh -i build/Updates_NC-normalized.csv -o build
+	./generate.sh -i build/Updates_NC-normalized.csv -o build
 
 html:
-	./new-html.sh -i build/Updates_NC-normalized.csv -o build
+	./html.sh -i build/Updates_NC-normalized.csv -o build
 
 images:
-	./new-images.sh -i build/Updates_NC-normalized.csv -o build
+	./images.sh -i build/Updates_NC-normalized.csv -o build
 
 clean:
 	rm -rf build

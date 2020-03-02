@@ -42,7 +42,7 @@ else
 	mkdir -p "${output}"
 fi
 
-htmlFilePath="${output}/new.html"
+htmlFilePath="${output}/index.html"
 
 now=$(date +%s)
 lastUpdateDate=$( \
@@ -117,10 +117,23 @@ nav {
 menuitem {
 	padding: 0.3em;
 }
-h1 {
+
+hgroup {
 	text-align: center;
+	font-family: Verdana, sans-serif;
 }
-h2 a:before {
+
+h1 {
+	font-size: 1.93rem;
+	margin-bottom: 0;
+}
+
+h2 {
+	font-size: 1.16rem;
+	margin-top: 0;
+}
+
+section h2 a:before {
 	content: "#";
 }
 img {
@@ -149,45 +162,52 @@ p.top {
 p.top a:before {
 	content: "^";
 }
+
+.confirmed {
+	color: red;
+}
+.cured {
+	color: #59C697
+}
+.dead {
+	color: #5D7092;
+}
 </style>
 </head>
 <body>
 <header>
-<a name="top"></a>
-<ul>
-	<li>最后更新：${lastUpdateDate}</li>
-</ul>
-<h1>2019冠狀病毒病疫情按地区每日新增确诊人数</h1>
+	<a name="top"></a>
+	<hgroup>
+		<h1>2019冠狀病毒病疫情</h1>
+		<h2>按地区每日新增确诊/出院/死亡人数</h2>
+	</hgroup>
+	<ul>
+		<li>最后更新：${lastUpdateDate}</li>
+	</ul>
 </header>
 
 <nav>
 <menu>
 EOM
 
-total=$(cat "${csvFilePath}" \
-	| awk \
-		-F ',' \
-		'
-		NR != 1 {
-			sum += $4
-		}
-		END {
-			print sum
-		}
-		' \
-)
-
-echo "<menuitem><a href=\"#all\">全球(${total})</a></menuitem>" >> "${htmlFilePath}"
 cat "${csvFilePath}" \
 	| awk \
 		-F ',' \
 		'
+		NR != 1 {
+			total_confirmed += $4
+			total_cured += $5
+			total_dead += $6
+		}
 		NR != 1 && $2 != "" {
-			sum[$2] += $4
+			confirmed[$2] += $4
+			cured[$2] += $5
+			dead[$2] += $6
 		}
 		END {
-			for (i in sum) {
-				print sum[i] " " i
+			print total_confirmed " " total_cured " " total_dead " 全球"
+			for (i in confirmed) {
+				print confirmed[i] " " cured[i] " " dead[i] " " i
 			}
 		}
 		' \
@@ -195,7 +215,7 @@ cat "${csvFilePath}" \
 	| awk \
 		'
 		{
-			print "<menuitem><a href=\"#"$2"\">"$2"("$1")</a></menuitem>"
+			print "<menuitem><a href=\"#"$4"\">"$4"(<span class=\"confirmed\">"$1"</span>/<span class=\"cured\">"$2"</span>/<span class=\"dead\">"$3"</span>)</a></menuitem>"
 		}
 		' \
 	>> "${htmlFilePath}"
@@ -203,24 +223,29 @@ cat "${csvFilePath}" \
 cat >> "${htmlFilePath}" <<- EOM
 </menu>
 </nav>
+
 <hr class="style-six" />
-<a name="all"></a>
-<h2><a href="#all">全球(${total})</a></h2>
-<p><img alt="全球" class="lazy" src="images/new-screen.png?t=${now}" data-src="images/new-print.png?t=${now}" data-srcset="images/new-print.png?t=${now} 1x, images/new-retina.png?t=${now} 2x" /></p>
-<p class="top"><a href="#top">top</a></p>
-<hr class="style-six" data-content="全球" />
+
 EOM
 
 cat "${csvFilePath}" \
 	| awk \
 		-F ',' \
 		'
+		NR != 1 {
+			total_confirmed += $4
+			total_cured += $5
+			total_dead += $6
+		}
 		NR != 1 && $2 != "" {
-			sum[$2] += $4
+			confirmed[$2] += $4
+			cured[$2] += $5
+			dead[$2] += $6
 		}
 		END {
-			for (i in sum) {
-				print sum[i] " " i
+			print total_confirmed " " total_cured " " total_dead " 全球"
+			for (i in confirmed) {
+				print confirmed[i] " " cured[i] " " dead[i] " " i
 			}
 		}
 		' \
@@ -229,7 +254,15 @@ cat "${csvFilePath}" \
 		-v "now=${now}" \
 		'
 		{
-			print "<a name=\""$2"\"></a><h2><a href=\"#"$2"\">"$2"("$1")""</a></h2><p><img alt=\""$2"\" class=\"lazy\" src=\"images/new-"$2"-screen.png?t="now"\" data-src=\"images/new-"$2"-print.png?t="now"\" data-srcset=\"images/new-"$2"-print.png?t="now" 1x, images/new-"$2"-retina.png?t="now" 2x\" /></p><p class=\"top\"><a href=\"#top\">top</a></p><hr class=\"style-six\" />"
+			print "<section>"
+			print "<a name=\""$4"\"></a>"
+			print "<h2><a href=\"#"$4"\">"$4"(<span class=\"confirmed\">"$1"</span>/<span class=\"cured\">"$2"</span>/<span class=\"dead\">"$3"</span>)</a></h2>"
+			print "<p><img alt=\""$4"\" class=\"lazy\" src=\"images/新增确诊-"$4"-screen.png?t="now"\" data-src=\"images/新增确诊-"$4"-print.png?t="now"\" data-srcset=\"images/新增确诊-"$4"-print.png?t="now" 1x, images/新增确诊-"$4"-retina.png?t="now" 2x\" /></p>"
+			print "<p><img alt=\""$4"\" class=\"lazy\" src=\"images/新增出院-"$4"-screen.png?t="now"\" data-src=\"images/新增出院-"$4"-print.png?t="now"\" data-srcset=\"images/新增出院-"$4"-print.png?t="now" 1x, images/新增出院-"$4"-retina.png?t="now" 2x\" /></p>"
+			print "<p><img alt=\""$4"\" class=\"lazy\" src=\"images/新增死亡-"$4"-screen.png?t="now"\" data-src=\"images/新增死亡-"$4"-print.png?t="now"\" data-srcset=\"images/新增死亡-"$4"-print.png?t="now" 1x, images/新增死亡-"$4"-retina.png?t="now" 2x\" /></p>"
+			print "<p class=\"top\"><a href=\"#top\">top</a></p>"
+			print "<hr class=\"style-six\" />"
+			print "</section>"
 		}
 		' \
 	>> "${htmlFilePath}"
