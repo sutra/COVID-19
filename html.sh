@@ -76,10 +76,10 @@ cat > "${htmlFilePath}" <<- EOM
 <!doctype html>
 <html>
 <head>
-<title>2019冠狀病毒病疫情按地区每日新增确诊人数</title>
+<title>2019冠狀病毒病疫情 - 按地区每日新增确诊/出院/死亡人数</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="2019冠狀病毒病疫情按地区每日新增确诊人数">
+<meta name="description" content="2019冠狀病毒病疫情 - 按地区每日新增确诊/出院/死亡人数">
 <style type="text/css">
 img:not([src]) {
 	visibility: hidden;
