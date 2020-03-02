@@ -46,9 +46,9 @@ plot <- ggplot(data = df, aes(x = as.Date(报道时间, "%m月%d日"), y = 新�
 
 name <- "new"
 if (!is.na(area)) {
-  name <- paste("new-", area, sep = "")
+  name <- paste0("new-", area)
 }
 
-ggsave(plot = plot, filename = paste(name, "-screen", ".png", sep = ""), path = output, height = 4, width = 8, dpi = "screen")
-ggsave(plot = plot, filename = paste(name, "-print",  ".png", sep = ""), path = output, height = 4, width = 8, dpi = "print")
-ggsave(plot = plot, filename = paste(name, "-retina", ".png", sep = ""), path = output, height = 4, width = 8, dpi = "retina")
+ggsave(plot = plot, filename = paste0(name, "-screen", ".png"), path = output, height = 4, width = 8, dpi = "screen")
+ggsave(plot = plot, filename = paste0(name, "-print",  ".png"), path = output, height = 4, width = 8, dpi = "print")
+ggsave(plot = plot, filename = paste0(name, "-retina", ".png"), path = output, height = 4, width = 8, dpi = "retina")
