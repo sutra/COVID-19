@@ -1,7 +1,8 @@
 all: download csv generate
 
 download:
-	wget -P build -c 'https://raw.githubusercontent.com/839Studio/Novel-Coronavirus-Updates/master/Updates_NC.csv'
+	mkdir -p build
+	wget -q -O build/Updates_NC.csv 'https://raw.githubusercontent.com/839Studio/Novel-Coronavirus-Updates/master/Updates_NC.csv'
 
 csv:
 	Rscript csv.R build/Updates_NC.csv build/Updates_NC-normalized.csv
