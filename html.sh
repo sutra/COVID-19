@@ -114,6 +114,16 @@ header ul {
 
 menuitem {
 	padding: 0.3em;
+	display: inline-block;
+}
+
+menuitem a {
+	display: inline-block;
+	width: 100%;
+}
+
+menuitem a:hover {
+	text-decoration: none;
 }
 
 hgroup {
@@ -151,7 +161,6 @@ a {
 }
 a:hover {
 	color: #000;
-	text-decoration: underline;
 }
 p.top {
 	text-align: right;
