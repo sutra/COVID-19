@@ -45,7 +45,7 @@ fi
 imageOutput="${output}/images"
 mkdir -p "${imageOutput}"
 
-Rscript "${basedir}/image.R" "${input}" "${imageOutput}" "新增确诊" "red"
+Rscript "${basedir}/image.R" "${input}" "${imageOutput}" "新增确诊" "#FF5B5C"
 Rscript "${basedir}/image.R" "${input}" "${imageOutput}" "新增出院" "#28B7A3"
 Rscript "${basedir}/image.R" "${input}" "${imageOutput}" "新增死亡" "#5D7092"
 cat "${csvFilePath}" \
@@ -68,7 +68,7 @@ cat "${csvFilePath}" \
 		-v "imageOutput=${imageOutput}" \
 		'
 		$2 != "" {
-			cmd="Rscript "basedir"/image.R \"" input "\" \"" imageOutput "\" \"新增确诊\" \"red\" \"" $2 "\""
+			cmd="Rscript "basedir"/image.R \"" input "\" \"" imageOutput "\" \"新增确诊\" \"#FF5B5C\" \"" $2 "\""
 			print cmd
 			system(cmd)
 

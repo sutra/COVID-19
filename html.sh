@@ -111,9 +111,7 @@ header ul {
 	padding: 0 1em;
 	list-style-type: none;
 }
-nav {
-	padding: 1em;
-}
+
 menuitem {
 	padding: 0.3em;
 }
@@ -133,7 +131,7 @@ h2 {
 	margin-top: 0;
 }
 
-section h2 a:before {
+section h2 a::before {
 	content: "#";
 }
 img {
@@ -153,24 +151,42 @@ a {
 }
 a:hover {
 	color: #000;
+	text-decoration: underline;
 }
 p.top {
 	text-align: right;
 	padding: 0.4em 1em;
 	font-size: small;
 }
-p.top a:before {
+p.top a::before {
 	content: "^";
 }
 
 .confirmed {
-	color: red;
+	color: #FF5B5C;
 }
 .cured {
 	color: #59C697
 }
 .dead {
 	color: #5D7092;
+}
+.existing {
+	color: #FF3535;
+}
+
+.explanation {
+	font-size: x-small;
+}
+menuitem .explanation::before {
+	content: " ";
+}
+section .explanation::before {
+	content: " ";
+}
+
+menuitem .equation {
+	display: none;
 }
 </style>
 </head>
@@ -205,9 +221,9 @@ cat "${csvFilePath}" \
 			dead[$2] += $6
 		}
 		END {
-			print total_confirmed " " total_cured " " total_dead " 全球"
+			print total_confirmed - total_cured - total_dead " " total_confirmed " " total_cured " " total_dead " 全球"
 			for (i in confirmed) {
-				print confirmed[i] " " cured[i] " " dead[i] " " i
+				print confirmed[i] - cured[i] - dead[i] " " confirmed[i] " " cured[i] " " dead[i] " " i
 			}
 		}
 		' \
@@ -215,7 +231,15 @@ cat "${csvFilePath}" \
 	| awk \
 		'
 		{
-			print "<menuitem><a href=\"#"$4"\">"$4"(<span class=\"confirmed\">"$1"</span>/<span class=\"cured\">"$2"</span>/<span class=\"dead\">"$3"</span>)</a></menuitem>"
+			existing = $1
+			confirmed = $2
+			cured = $3
+			dead = $4
+			area = $5
+
+			print "<menuitem>"
+			print "<a href=\"#"area"\" title=\""confirmed"-"cured"-"dead"="existing"\">"area"<span class=\"explanation\"><span class=\"equation\"><span class=\"confirmed\">"confirmed"</span>-<span class=\"cured\">"cured"</span>-<span class=\"dead\">"dead"</span>=</span><span class=\"existing\">"existing"</span></span></a>"
+			print" </menuitem>"
 		}
 		' \
 	>> "${htmlFilePath}"
@@ -243,9 +267,9 @@ cat "${csvFilePath}" \
 			dead[$2] += $6
 		}
 		END {
-			print total_confirmed " " total_cured " " total_dead " 全球"
+			print total_confirmed - total_cured - total_dead " " total_confirmed " " total_cured " " total_dead " 全球"
 			for (i in confirmed) {
-				print confirmed[i] " " cured[i] " " dead[i] " " i
+				print confirmed[i] - cured[i] - dead[i] " " confirmed[i] " " cured[i] " " dead[i] " " i
 			}
 		}
 		' \
@@ -254,12 +278,20 @@ cat "${csvFilePath}" \
 		-v "now=${now}" \
 		'
 		{
+			existing = $1
+			confirmed = $2
+			cured = $3
+			dead = $4
+			area = $5
+
 			print "<section>"
-			print "<a name=\""$4"\"></a>"
-			print "<h2><a href=\"#"$4"\">"$4"(<span class=\"confirmed\">"$1"</span>/<span class=\"cured\">"$2"</span>/<span class=\"dead\">"$3"</span>)</a></h2>"
-			print "<p><img alt=\""$4"\" class=\"lazy\" src=\"images/新增确诊-"$4"-screen.png?t="now"\" data-src=\"images/新增确诊-"$4"-print.png?t="now"\" data-srcset=\"images/新增确诊-"$4"-print.png?t="now" 1x, images/新增确诊-"$4"-retina.png?t="now" 2x\" /></p>"
-			print "<p><img alt=\""$4"\" class=\"lazy\" src=\"images/新增出院-"$4"-screen.png?t="now"\" data-src=\"images/新增出院-"$4"-print.png?t="now"\" data-srcset=\"images/新增出院-"$4"-print.png?t="now" 1x, images/新增出院-"$4"-retina.png?t="now" 2x\" /></p>"
-			print "<p><img alt=\""$4"\" class=\"lazy\" src=\"images/新增死亡-"$4"-screen.png?t="now"\" data-src=\"images/新增死亡-"$4"-print.png?t="now"\" data-srcset=\"images/新增死亡-"$4"-print.png?t="now" 1x, images/新增死亡-"$4"-retina.png?t="now" 2x\" /></p>"
+			print "<a name=\""area"\"></a>"
+			print "<h2>"
+			print "<a href=\"#"area"\" title=\""confirmed"-"cured"-"dead"="existing"\">"area"<span class=\"explanation\"><span class=\"equation\"><span class=\"confirmed\">"confirmed"</span>-<span class=\"cured\">"cured"</span>-<span class=\"dead\">"dead"</span>=</span><span class=\"existing\">"existing"</span></span></a>"
+			print "</h2>"
+			print "<p><img alt=\""area"-新增确诊\" class=\"lazy\" src=\"images/"area"-新增确诊-screen.png?t="now"\" data-src=\"images/"area"-新增确诊-print.png?t="now"\" data-srcset=\"images/"area"-新增确诊-print.png?t="now" 1x, images/"area"-新增确诊-retina.png?t="now" 2x\" /></p>"
+			print "<p><img alt=\""area"-新增出院\" class=\"lazy\" src=\"images/"area"-新增出院-screen.png?t="now"\" data-src=\"images/"area"-新增出院-print.png?t="now"\" data-srcset=\"images/"area"-新增出院-print.png?t="now" 1x, images/"area"-新增出院-retina.png?t="now" 2x\" /></p>"
+			print "<p><img alt=\""area"-新增死亡\" class=\"lazy\" src=\"images/"area"-新增死亡-screen.png?t="now"\" data-src=\"images/"area"-新增死亡-print.png?t="now"\" data-srcset=\"images/"area"-新增死亡-print.png?t="now" 1x, images/"area"-新增死亡-retina.png?t="now" 2x\" /></p>"
 			print "<p class=\"top\"><a href=\"#top\">top</a></p>"
 			print "<hr class=\"style-six\" />"
 			print "</section>"

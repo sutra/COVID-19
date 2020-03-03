@@ -46,7 +46,7 @@ plot <- ggplot(data = df, aes_string(x = 'as.Date(报道时间, "%m月%d日")', 
   ylab(y) +
   theme(text=element_text(family = "Arial Unicode MS", size = 8))
 
-name <- paste0(y, "-", title)
+name <- paste0(title, "-", y)
 
 ggsave(plot = plot, filename = paste0(name, "-screen", ".png"), path = output, height = 4, width = 12, dpi = "screen")
 ggsave(plot = plot, filename = paste0(name, "-print",  ".png"), path = output, height = 4, width = 12, dpi = "print")
