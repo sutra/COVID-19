@@ -22,7 +22,31 @@ if (!is.na(area)) {
 	title = "全球"
 }
 
-df <- aggregate(formula(paste0(y, "~报道时间")), data = data, FUN = sum)
+na.zero.data.frame <- function(object, ...) {
+	n <- length(object)
+	r <- nrow(object)
+
+	seq_n <- seq_len(n)
+	seq_r <- seq_len(r)
+
+	for(j in seq_n) {
+		x <- object[[j]]
+
+		if(!is.atomic(x)) next
+
+		x <- is.na(x)
+
+		for (i in seq_r) {
+			if (x[i]) {
+				object[j, i] <- 0
+			}
+		}
+	}
+
+	object
+}
+
+df <- aggregate(formula(paste0(y, "~报道时间")), data = data, FUN = sum, na.action = na.zero.data.frame)
 
 begin = as.Date("2020-01-11", "%Y-%m-%d")
 end = Sys.Date()
