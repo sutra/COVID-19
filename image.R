@@ -38,7 +38,7 @@ na.zero.data.frame <- function(object, ...) {
 
 		for (i in seq_r) {
 			if (x[i]) {
-				object[j, i] <- 0
+				object[i, j] <- 0
 			}
 		}
 	}
