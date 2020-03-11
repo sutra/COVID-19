@@ -68,6 +68,6 @@ plot <- ggplot(data = df, aes_string(x = 'as.Date(报道时间, "%m月%d日")', 
 
 name <- paste0(title, "-", y)
 
-ggsave(plot = plot, filename = paste0(name, "-screen", ".png"), path = output, height = 3, width = 9, dpi = "screen")
-ggsave(plot = plot, filename = paste0(name, "-print",  ".png"), path = output, height = 3, width = 9, dpi = "print")
-ggsave(plot = plot, filename = paste0(name, "-retina", ".png"), path = output, height = 3, width = 9, dpi = "retina")
+ggsave(plot = plot, filename = paste0(name, "-screen", ".png"), path = output, height = 5, width = 12, dpi = "screen")
+ggsave(plot = plot, filename = paste0(name, "-print",  ".png"), path = output, height = 5, width = 12, dpi = "print")
+ggsave(plot = plot, filename = paste0(name, "-retina", ".png"), path = output, height = 5, width = 12, dpi = "retina")
