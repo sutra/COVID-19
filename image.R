@@ -1,8 +1,4 @@
-library(extrafont)
 library(ggplot2)
-
-loadfonts()
-#fonts()
 
 args = commandArgs(trailingOnly=TRUE)
 input <- args[1]
