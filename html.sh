@@ -7,13 +7,19 @@ usage: $0 <-i input> [-o output]
 EOF
 }
 
-while getopts ":i:o:" o; do
+while getopts ":i:o:f:y:" o; do
 	case "${o}" in
 		i)
 			input="${OPTARG}"
 			;;
 		o)
 			output="${OPTARG}"
+			;;
+		f)
+			filename="${OPTARG}"
+			;;
+		y)
+			y="${OPTARG}"
 			;;
 		*)
 			usage
@@ -42,7 +48,7 @@ else
 	mkdir -p "${output}"
 fi
 
-htmlFilePath="${output}/index.html"
+htmlFilePath="${output}/${filename}"
 
 now=$(date +%s)
 lastUpdateDate=$( \
@@ -204,7 +210,7 @@ menuitem .equation {
 	<a name="top"></a>
 	<hgroup>
 		<h1>2019冠状病毒病疫情</h1>
-		<h2>按地区每日新增确诊/出院/死亡人数</h2>
+		<h2>按地区每日<a href="index.html">新增</a><a href="confirmed.html">确诊</a>/<a href="cured.html">出院</a>/<a href="dead.html">死亡</a>人数</h2>
 	</hgroup>
 	<ul>
 		<li>最后更新：${lastUpdateDate}</li>
@@ -285,6 +291,7 @@ cat "${csvFilePath}" \
 	| sort -nr \
 	| awk \
 		-v "now=${now}" \
+		-v "y=${y}" \
 		'
 		{
 			existing = $1
@@ -298,9 +305,13 @@ cat "${csvFilePath}" \
 			print "<h2>"
 			print "<a href=\"#"area"\" title=\""confirmed"-"cured"-"dead"="existing"\">"area"<span class=\"explanation\"><span class=\"equation\"><span class=\"confirmed\">"confirmed"</span>-<span class=\"cured\">"cured"</span>-<span class=\"dead\">"dead"</span>=</span><span class=\"existing\">"existing"</span></span></a>"
 			print "</h2>"
-			print "<p><img alt=\""area"-新增确诊\" class=\"lazy\" src=\"images/"area"-新增确诊-screen.png?t="now"\" data-src=\"images/"area"-新增确诊-print.png?t="now"\" data-srcset=\"images/"area"-新增确诊-print.png?t="now" 1x, images/"area"-新增确诊-retina.png?t="now" 2x\" /></p>"
-			print "<p><img alt=\""area"-新增出院\" class=\"lazy\" src=\"images/"area"-新增出院-screen.png?t="now"\" data-src=\"images/"area"-新增出院-print.png?t="now"\" data-srcset=\"images/"area"-新增出院-print.png?t="now" 1x, images/"area"-新增出院-retina.png?t="now" 2x\" /></p>"
-			print "<p><img alt=\""area"-新增死亡\" class=\"lazy\" src=\"images/"area"-新增死亡-screen.png?t="now"\" data-src=\"images/"area"-新增死亡-print.png?t="now"\" data-srcset=\"images/"area"-新增死亡-print.png?t="now" 1x, images/"area"-新增死亡-retina.png?t="now" 2x\" /></p>"
+			if (y == "") {
+				print "<p><img alt=\""area"-新增确诊\" class=\"lazy\" src=\"images/"area"-新增确诊-screen.png?t="now"\" data-src=\"images/"area"-新增确诊-print.png?t="now"\" data-srcset=\"images/"area"-新增确诊-print.png?t="now" 1x, images/"area"-新增确诊-retina.png?t="now" 2x\" /></p>"
+				print "<p><img alt=\""area"-新增出院\" class=\"lazy\" src=\"images/"area"-新增出院-screen.png?t="now"\" data-src=\"images/"area"-新增出院-print.png?t="now"\" data-srcset=\"images/"area"-新增出院-print.png?t="now" 1x, images/"area"-新增出院-retina.png?t="now" 2x\" /></p>"
+				print "<p><img alt=\""area"-新增死亡\" class=\"lazy\" src=\"images/"area"-新增死亡-screen.png?t="now"\" data-src=\"images/"area"-新增死亡-print.png?t="now"\" data-srcset=\"images/"area"-新增死亡-print.png?t="now" 1x, images/"area"-新增死亡-retina.png?t="now" 2x\" /></p>"
+			} else {
+				print "<p><img alt=\""area"-"y"\" class=\"lazy\" src=\"images/"area"-"y"-screen.png?t="now"\" data-src=\"images/"area"-"y"-print.png?t="now"\" data-srcset=\"images/"area"-"y"-print.png?t="now" 1x, images/"area"-"y"-retina.png?t="now" 2x\" /></p>"
+			}
 			print "<p class=\"top\"><a href=\"#top\">top</a></p>"
 			print "<hr class=\"style-six\" />"
 			print "</section>"

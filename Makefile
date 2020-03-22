@@ -11,7 +11,10 @@ generate:
 	./generate.sh -i build/Updates_NC-normalized.csv -o build
 
 html:
-	./html.sh -i build/Updates_NC-normalized.csv -o build
+	./html.sh -i build/Updates_NC-normalized.csv -o build  -f index.html
+	./html.sh -i build/Updates_NC-normalized.csv -o build  -y "新增确诊" -f confirmed.html
+	./html.sh -i build/Updates_NC-normalized.csv -o build  -y "新增出院" -f cured.html
+	./html.sh -i build/Updates_NC-normalized.csv -o build  -y "新增死亡" -f dead.html
 
 images:
 	./images.sh -i build/Updates_NC-normalized.csv -o build
