@@ -52,7 +52,7 @@ fi
 
 if [ -z "${filename}" ]; then
 	filename="index.html"
-if
+fi
 
 htmlFilePath="${output}/${filename}"
 
