@@ -1,9 +1,11 @@
 #!/bin/sh
 usage() {
 cat << EOF
-usage: $0 <-i input> [-o output]
+usage: $0 <-i input> [-o output] [-f filename] [-y y]
 	-i input
 	-o output
+	-f output filename
+	-y the y axis value
 EOF
 }
 
@@ -47,6 +49,10 @@ if [ -z "${output}" ]; then
 else
 	mkdir -p "${output}"
 fi
+
+if [ -z "${filename}" ]; then
+	filename="index.html"
+if
 
 htmlFilePath="${output}/${filename}"
 
