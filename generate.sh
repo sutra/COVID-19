@@ -46,4 +46,23 @@ fi
 
 ${basedir}/html.sh \
 	-i "${input}" \
-	-o "${output}"
+	-o "${output}" \
+	-f index.html
+
+${basedir}/html.sh \
+	-i "${input}" \
+	-o "${output}" \
+	-y "新增确诊" \
+	-f confirmed.html
+
+${basedir}/html.sh \
+	-i "${input}" \
+	-o "${output}" \
+	-y "新增出院" \
+	-f cured.html
+
+	${basedir}/html.sh \
+	-i "${input}" \
+	-o "${output}" \
+	-y "新增死亡" \
+	-f dead.html
