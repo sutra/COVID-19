@@ -157,6 +157,15 @@ section h2 a::before {
 }
 img {
 	width: 100%;
+	opacity: 0;
+}
+img:not(.initial) {
+	transition: opacity 1s;
+}
+img.initial,
+img.loaded,
+img.error {
+	opacity: 1;
 }
 footer {
 	text-align: right;
@@ -311,11 +320,27 @@ cat "${csvFilePath}" \
 			print "<a href=\"#"area"\" title=\""confirmed"-"cured"-"dead"="existing"\">"area"<span class=\"explanation\"><span class=\"equation\"><span class=\"confirmed\">"confirmed"</span>-<span class=\"cured\">"cured"</span>-<span class=\"dead\">"dead"</span>=</span><span class=\"existing\">"existing"</span></span></a>"
 			print "</h2>"
 			if (y == "") {
-				print "<p><img alt=\""area"-新增确诊\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-新增确诊-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增确诊-print.png?t="lastUpdateDate" 1x, images/"area"-新增确诊-retina.png?t="lastUpdateDate" 2x\" /></p>"
-				print "<p><img alt=\""area"-新增出院\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-新增出院-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增出院-print.png?t="lastUpdateDate" 1x, images/"area"-新增出院-retina.png?t="lastUpdateDate" 2x\" /></p>"
-				print "<p><img alt=\""area"-新增死亡\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-新增死亡-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增死亡-print.png?t="lastUpdateDate" 1x, images/"area"-新增死亡-retina.png?t="lastUpdateDate" 2x\" /></p>"
+				print "<p>"
+				print "<a href=\"images/"area"-新增确诊-retina.png?t="lastUpdateDate"\">"
+				print "<img alt=\""area"-新增确诊\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-新增确诊-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增确诊-print.png?t="lastUpdateDate" 1x, images/"area"-新增确诊-retina.png?t="lastUpdateDate" 2x\" />"
+				print "</a>"
+				print "</p>"
+				print "<p>"
+				print "<a href=\"images/"area"-新增出院-retina.png?t="lastUpdateDate"\">"
+				print "<img alt=\""area"-新增出院\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-新增出院-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增出院-print.png?t="lastUpdateDate" 1x, images/"area"-新增出院-retina.png?t="lastUpdateDate" 2x\" />"
+				print "</a>"
+				print "</p>"
+				print "<p>"
+				print "<a href=\"images/"area"-新增死亡-retina.png?t="lastUpdateDate"\">"
+				print "<img alt=\""area"-新增死亡\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-新增死亡-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增死亡-print.png?t="lastUpdateDate" 1x, images/"area"-新增死亡-retina.png?t="lastUpdateDate" 2x\" />"
+				print "</a>"
+				print "</p>"
 			} else {
-				print "<p><img alt=\""area"-"y"\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-"y"-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-"y"-print.png?t="lastUpdateDate" 1x, images/"area"-"y"-retina.png?t="lastUpdateDate" 2x\" /></p>"
+				print "<p>"
+				print "<a href=\"images/"area"-"y"-retina.png?t="lastUpdateDate"\">"
+				print "<img alt=\""area"-"y"\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-"y"-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-"y"-print.png?t="lastUpdateDate" 1x, images/"area"-"y"-retina.png?t="lastUpdateDate" 2x\" />"
+				print "</a>"
+				print "</p>"
 			}
 			print "<p class=\"top\"><a href=\"#top\">top</a></p>"
 			print "<hr class=\"style-six\" />"
