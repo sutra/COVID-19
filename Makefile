@@ -1,4 +1,4 @@
-all: download csv placeholder generate
+all: download csv generate
 
 download:
 	mkdir -p build
@@ -15,12 +15,7 @@ html:
 	./html.sh -i build/Updates_NC-normalized.csv -o build -y "新增确诊" -f confirmed.html
 	./html.sh -i build/Updates_NC-normalized.csv -o build -y "新增出院" -f cured.html
 	./html.sh -i build/Updates_NC-normalized.csv -o build -y "新增死亡" -f dead.html
-
-placeholder:
-	mkdir -p 'build/images'
-	# White GIF.gif
-	# http://proger.i-forge.net/Компьютер/[20121112]%20The%20smallest%20transparent%20pixel.html
-	echo 'R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=' | base64 -d > 'build/images/White GIF.gif'
+	cp covid-19.js style.css build/
 
 images:
 	./images.sh -i build/Updates_NC-normalized.csv -o build

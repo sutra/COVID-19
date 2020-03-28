@@ -26,4 +26,4 @@ if [ -z "${input}" ]; then
 	input="${basedir}"
 fi
 
-rsync -havzP --stats ${input}/ panther:/usr/local/www/COVID-19/
+rsync -havzP --rsync-path="sudo rsync" --stats ${input}/ panther:/usr/local/www/COVID-19/

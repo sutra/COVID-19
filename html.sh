@@ -91,133 +91,7 @@ cat > "${htmlFilePath}" <<- EOM
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="2019冠状病毒病疫情 - 按地区每日新增确诊/出院/死亡人数">
-<style type="text/css">
-img:not([src]) {
-	visibility: hidden;
-}
-
-/* Fixes Firefox anomaly during image load */
-@-moz-document url-prefix() {
-	img:-moz-loading {
-		visibility: hidden;
-	}
-}
-
-/* Inset, by Dan Eden */
-
-hr.style-six {
-	border: 0;
-	height: 0;
-	border-top: 1px solid rgba(0, 0, 0, 0.1);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-* {
-	margin: 0;
-	padding: 0;
-}
-header ul {
-	text-align: right;
-	font-size: xx-small;
-	padding: 0 1em;
-	list-style-type: none;
-}
-
-menuitem {
-	padding: 0.3em;
-	display: inline-block;
-}
-
-menuitem a {
-	display: inline-block;
-	width: 100%;
-}
-
-menuitem a:hover {
-	text-decoration: none;
-}
-
-hgroup {
-	text-align: center;
-	font-family: Verdana, sans-serif;
-}
-
-h1 {
-	font-size: 1.93rem;
-	margin-bottom: 0;
-}
-
-h2 {
-	font-size: 1.16rem;
-	margin-top: 0;
-}
-
-section h2 a::before {
-	content: "#";
-}
-img {
-	width: 100%;
-	opacity: 0;
-}
-img:not(.initial) {
-	transition: opacity 1s;
-}
-img.initial,
-img.loaded,
-img.error {
-	opacity: 1;
-}
-footer {
-	text-align: right;
-	font-size: xx-small;
-	padding: 2em 1em;
-}
-footer ul {
-	list-style-type: none;
-}
-a {
-	color: #818181;
-	text-decoration: none;
-}
-a:hover {
-	color: #000;
-}
-p.top {
-	text-align: right;
-	padding: 0.4em 1em;
-	font-size: small;
-}
-p.top a::before {
-	content: "^";
-}
-
-.confirmed {
-	color: #FF5B5C;
-}
-.cured {
-	color: #59C697
-}
-.dead {
-	color: #5D7092;
-}
-.existing {
-	color: #FF3535;
-}
-
-.explanation {
-	font-size: x-small;
-}
-menuitem .explanation::before {
-	content: " ";
-}
-section .explanation::before {
-	content: " ";
-}
-
-menuitem .equation {
-	display: none;
-}
-</style>
+<link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
 <header>
@@ -322,23 +196,23 @@ cat "${csvFilePath}" \
 			if (y == "") {
 				print "<p>"
 				print "<a href=\"images/"area"-新增确诊-retina.png?t="lastUpdateDate"\">"
-				print "<img alt=\""area"-新增确诊\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-新增确诊-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增确诊-print.png?t="lastUpdateDate" 1x, images/"area"-新增确诊-retina.png?t="lastUpdateDate" 2x\" />"
+				print "<img alt=\""area"-新增确诊\" class=\"lazy\" src=\"images/"area"-新增确诊-screen.png?t="lastUpdateDate"\" data-src=\"images/"area"-新增确诊-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增确诊-print.png?t="lastUpdateDate" 1x, images/"area"-新增确诊-retina.png?t="lastUpdateDate" 2x\" />"
 				print "</a>"
 				print "</p>"
 				print "<p>"
 				print "<a href=\"images/"area"-新增出院-retina.png?t="lastUpdateDate"\">"
-				print "<img alt=\""area"-新增出院\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-新增出院-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增出院-print.png?t="lastUpdateDate" 1x, images/"area"-新增出院-retina.png?t="lastUpdateDate" 2x\" />"
+				print "<img alt=\""area"-新增出院\" class=\"lazy\" src=\"images/"area"-新增出院-screen.png?t="lastUpdateDate"\" data-src=\"images/"area"-新增出院-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增出院-print.png?t="lastUpdateDate" 1x, images/"area"-新增出院-retina.png?t="lastUpdateDate" 2x\" />"
 				print "</a>"
 				print "</p>"
 				print "<p>"
 				print "<a href=\"images/"area"-新增死亡-retina.png?t="lastUpdateDate"\">"
-				print "<img alt=\""area"-新增死亡\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-新增死亡-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增死亡-print.png?t="lastUpdateDate" 1x, images/"area"-新增死亡-retina.png?t="lastUpdateDate" 2x\" />"
+				print "<img alt=\""area"-新增死亡\" class=\"lazy\" src=\"images/"area"-新增死亡-screen.png?t="lastUpdateDate"\" data-src=\"images/"area"-新增死亡-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-新增死亡-print.png?t="lastUpdateDate" 1x, images/"area"-新增死亡-retina.png?t="lastUpdateDate" 2x\" />"
 				print "</a>"
 				print "</p>"
 			} else {
 				print "<p>"
 				print "<a href=\"images/"area"-"y"-retina.png?t="lastUpdateDate"\">"
-				print "<img alt=\""area"-"y"\" class=\"lazy\" src=\"images/White GIF.gif\" data-src=\"images/"area"-"y"-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-"y"-print.png?t="lastUpdateDate" 1x, images/"area"-"y"-retina.png?t="lastUpdateDate" 2x\" />"
+				print "<img alt=\""area"-"y"\" class=\"lazy\" src=\"images/"area"-"y"-screen.png?t="lastUpdateDate"\" data-src=\"images/"area"-"y"-print.png?t="lastUpdateDate"\" data-srcset=\"images/"area"-"y"-print.png?t="lastUpdateDate" 1x, images/"area"-"y"-retina.png?t="lastUpdateDate" 2x\" />"
 				print "</a>"
 				print "</p>"
 			}
@@ -358,13 +232,7 @@ cat >> "${htmlFilePath}" <<- EOM
 </ul>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.4.0/dist/lazyload.min.js"></script>
-<script type="text/javascript">
-<!--
-var lazyLoadInstance = new LazyLoad({
-	elements_selector: ".lazy"
-});
-//-->
-</script>
+<script src="covid-19.js"></script>
 </body>
 </html>
 EOM

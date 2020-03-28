@@ -44,6 +44,8 @@ if [ ${status} -ne 0 ]; then
 	exit ${status}
 fi
 
+cp covid-19.js style.css "${output}"
+
 ${basedir}/html.sh \
 	-i "${input}" \
 	-o "${output}" \
