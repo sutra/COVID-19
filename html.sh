@@ -101,7 +101,7 @@ cat > "${htmlFilePath}" <<- EOM
 		<h2>按地区每日<a href="index.html">新增</a><a href="confirmed.html">确诊</a>/<a href="cured.html">出院</a>/<a href="dead.html">死亡</a>人数</h2>
 	</hgroup>
 	<ul>
-		<li>最后更新：${lastUpdateDate}</li>
+		<li>最后更新：<a href="${filename}" title="刷新" onclick="this.href=this.href + '?t=' + new Date().getTime()">${lastUpdateDate}</a></li>
 	</ul>
 </header>
 
