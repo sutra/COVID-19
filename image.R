@@ -55,7 +55,7 @@ plot <- ggplot(data = df, aes_string(x = 'as.Date(报道时间, "%m月%d日")', 
 		vjust = "left",
 		hjust = "left",
 		show.legend = FALSE,
-		angle = 45,
+		angle = 75,
 		size = 2
 	) +
 	geom_smooth(method="loess", size = 0.5) +
