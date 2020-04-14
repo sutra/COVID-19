@@ -69,7 +69,7 @@ lastUpdateDate=$( \
 			cmd | getline lastReportDate;
 			close(cmd);
 		}
-		$1~/^[0-9]{1,2}月[0-9]{1,2}日$/ {
+		$1~/^[0-9]+月[0-9]+日$/ {
 			cmd="date -j -f \"%m月%d日\" \""$1"\" \"+%m月%d日\"";
 			cmd | getline reportDate;
 			close(cmd);
