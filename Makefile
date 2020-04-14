@@ -6,7 +6,7 @@ download:
 
 csv:
 	Rscript csv.R build/Updates_NC.csv build/Updates_NC-normalized.csv
-	sed -ig 's/?//' build/Updates_NC-normalized.csv
+	sed -i '' 's/?//' build/Updates_NC-normalized.csv
 
 generate:
 	./generate.sh -i build/Updates_NC-normalized.csv -o build
