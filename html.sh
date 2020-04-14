@@ -92,16 +92,23 @@ cat > "${htmlFilePath}" <<- EOM
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="2019冠状病毒病疫情 - 按地区每日新增确诊/出院/死亡人数">
 <link rel="stylesheet" href="style.css" type="text/css">
+<script type="text/javascript">
+<!--
+function fresh(e) {
+	e.href = e.href + '?d=' + new Date().toISOString().split('T')[0];
+}
+//-->
+</script>
 </head>
 <body>
 <header>
 	<a name="top"></a>
 	<hgroup>
 		<h1>2019冠状病毒病疫情</h1>
-		<h2>按地区每日<a href="index.html">新增</a><a href="confirmed.html">确诊</a>/<a href="cured.html">出院</a>/<a href="dead.html">死亡</a>人数</h2>
+		<h2>按地区每日<a href="index.html" onclick="fresh(this)">新增</a><a href="confirmed.html" onclick="fresh(this)">确诊</a>/<a href="cured.html" onclick="fresh(this)">出院</a>/<a href="dead.html" onclick="fresh(this)">死亡</a>人数</h2>
 	</hgroup>
 	<ul>
-		<li>最后更新：<a href="${filename}" title="刷新" onclick="this.href=this.href + '?t=' + new Date().getTime()">${lastUpdateDate}</a></li>
+		<li>最后更新：<a href="${filename}" title="刷新" onclick="fresh(this)">${lastUpdateDate}</a></li>
 	</ul>
 </header>
 
