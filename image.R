@@ -12,7 +12,7 @@ area
 data <- read.csv(file = input, sep = ",", header = TRUE)
 
 if (!is.na(area)) {
-	data <- data[which(data$地区 == area), ]
+	data <- data[which(data$省份 == area), ]
 	title = area
 } else {
 	title = "全球"
